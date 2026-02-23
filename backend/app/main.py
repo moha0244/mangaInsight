@@ -1,33 +1,47 @@
-import sentry_sdk
+import uvicorn
 from fastapi import FastAPI
-from fastapi.routing import APIRoute
-from starlette.middleware.cors import CORSMiddleware
+from fastapi.middleware.cors import CORSMiddleware
+from apscheduler.schedulers.background import BackgroundScheduler
+from app.services.mal_scraper import fetch_and_save_top_anime
+from app.api.router import router as api_router
 
-from app.api.main import api_router
-from app.core.config import settings
-
-
-def custom_generate_unique_id(route: APIRoute) -> str:
-    return f"{route.tags[0]}-{route.name}"
+# 1. Configuration de l'application
+app = FastAPI(title="Anime Insights API")
 
 
-if settings.SENTRY_DSN and settings.ENVIRONMENT != "local":
-    sentry_sdk.init(dsn=str(settings.SENTRY_DSN), enable_tracing=True)
-
-app = FastAPI(
-    title=settings.PROJECT_NAME,
-    openapi_url=f"{settings.API_V1_STR}/openapi.json",
-    generate_unique_id_function=custom_generate_unique_id,
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"], # En prod, remplace "*" par l'URL de ton app Angular
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
-# Set all CORS enabled origins
-if settings.all_cors_origins:
-    app.add_middleware(
-        CORSMiddleware,
-        allow_origins=settings.all_cors_origins,
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
-    )
 
-app.include_router(api_router, prefix=settings.API_V1_STR)
+app.include_router(api_router, prefix="/api")
+
+
+scheduler = BackgroundScheduler()
+CLIENT_ID = "6fa03dc18db37d1716ae9957a553c798" # Récupéré sur https://myanimelist.net/apiconfig
+
+@app.on_event("startup")
+def init_data_task():
+    # Lance une première récupération au démarrage
+    fetch_and_save_top_anime(CLIENT_ID)
+    
+    # Planifie une mise à jour toutes les 15 minutes
+    scheduler.add_job(
+        func=fetch_and_save_top_anime, 
+        trigger="interval", 
+        minutes=15, 
+        args=[CLIENT_ID]
+    )
+    scheduler.start()
+
+@app.get("/")
+def read_root():
+    return {"status": "Backend is running", "data_source": "MyAnimeList API v2"}
+
+if __name__ == "__main__":
+    # Lancement du serveur sur le port 8000
+    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)

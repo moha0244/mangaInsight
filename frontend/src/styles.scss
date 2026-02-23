@@ -1,0 +1,75 @@
+/* CSS Reset pour la cohérence cross-browser */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/* Styles spécifiques pour ApexCharts cross-browser */
+apx-chart,
+.apexcharts-canvas,
+.apexcharts-svg {
+  display: block !important;
+  max-width: 100% !important;
+  height: auto !important;
+}
+
+/* Assurer la cohérence des tailles de police */
+.chart-card {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !important;
+  
+  * {
+    box-sizing: border-box !important;
+  }
+}
+
+/* Correction pour les différents navigateurs */
+.apexcharts-legend {
+  font-family: inherit !important;
+}
+
+.apexcharts-tooltip {
+  font-family: inherit !important;
+}

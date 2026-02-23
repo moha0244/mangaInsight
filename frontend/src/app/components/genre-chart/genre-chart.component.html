@@ -1,0 +1,36 @@
+<div class="chart-card">
+  <div class="chart-header">
+    <div class="title-row">
+      <h2>{{ content.title }}</h2>
+      <span class="badge blue">{{ content.badge }}</span>
+    </div>
+    <div class="controls">
+      <button class="toggle-btn active">Genre principal</button>
+    </div>
+  </div>
+
+  <div class="chart-main">
+    @if (options.series && options.series.length > 0) {
+      <apx-chart
+        [series]="options.series"
+        [chart]="options.chart"
+        [labels]="options.labels"
+        [plotOptions]="options.plotOptions"
+        [dataLabels]="options.dataLabels"
+        [legend]="options.legend"
+        [stroke]="options.stroke"
+        [theme]="options.theme"
+        [colors]="options.colors"
+        [tooltip]="options.tooltip"
+      ></apx-chart>
+    } @else {
+      <div class="loader-container">
+        <span class="loader-text">Analyse des genres...</span>
+      </div>
+    }
+  </div>
+
+  <div class="chart-footer">
+    <p class="analysis-text">{{ content.description }}</p>
+  </div>
+</div>

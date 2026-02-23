@@ -1,0 +1,17 @@
+<div class="custom-select-container">
+  <span class="label">{{ label }} :</span>
+  <div class="select-box" (click)="toggle()" [class.open]="isOpen">
+    <span class="current-value">{{ selectedValue }}</span>
+    <span class="arrow">▼</span>
+
+    <ul class="options-list" *ngIf="isOpen">
+      <li
+        *ngFor="let option of options"
+        (click)="select(option); $event.stopPropagation()"
+        [class.active]="option === selectedValue"
+      >
+        {{ option }}
+      </li>
+    </ul>
+  </div>
+</div>

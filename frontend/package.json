@@ -1,66 +1,45 @@
 {
-  "name": "frontend",
-  "private": true,
+  "name": "manga-app-nouvelle",
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -p tsconfig.build.json && vite build",
-    "lint": "biome check --write --unsafe --no-errors-on-unmatched --files-ignore-unknown=true ./",
-    "preview": "vite preview",
-    "generate-client": "openapi-ts",
-    "test": "bunx playwright test",
-    "test:ui": "bunx playwright test --ui"
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test"
   },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "parser": "angular"
+        }
+      }
+    ]
+  },
+  "private": true,
+  "packageManager": "npm@11.8.0",
   "dependencies": {
-    "@hookform/resolvers": "^5.2.2",
-    "@radix-ui/react-avatar": "^1.1.11",
-    "@radix-ui/react-checkbox": "^1.3.3",
-    "@radix-ui/react-dialog": "^1.1.15",
-    "@radix-ui/react-dropdown-menu": "^2.1.16",
-    "@radix-ui/react-label": "^2.1.8",
-    "@radix-ui/react-radio-group": "^1.3.8",
-    "@radix-ui/react-scroll-area": "^1.2.10",
-    "@radix-ui/react-select": "^2.2.6",
-    "@radix-ui/react-separator": "^1.1.8",
-    "@radix-ui/react-slot": "^1.2.4",
-    "@radix-ui/react-tabs": "^1.1.13",
-    "@radix-ui/react-tooltip": "^1.2.8",
-    "@tailwindcss/vite": "^4.1.18",
-    "@tanstack/react-query": "^5.90.20",
-    "@tanstack/react-query-devtools": "^5.91.1",
-    "@tanstack/react-router": "^1.157.3",
-    "@tanstack/react-router-devtools": "^1.156.0",
-    "@tanstack/react-table": "^8.21.3",
-    "axios": "1.13.4",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "form-data": "4.0.5",
-    "lucide-react": "^0.563.0",
-    "next-themes": "^0.4.6",
-    "react": "^19.1.1",
-    "react-dom": "^19.2.3",
-    "react-error-boundary": "^6.0.0",
-    "react-hook-form": "^7.68.0",
-    "react-icons": "^5.5.0",
-    "sonner": "^2.0.7",
-    "tailwind-merge": "^3.4.0",
-    "tailwindcss": "^4.1.17",
-    "zod": "^4.3.6"
+    "@angular/common": "^21.1.5",
+    "@angular/compiler": "^21.1.5",
+    "@angular/core": "^21.1.5",
+    "@angular/forms": "^21.1.5",
+    "@angular/platform-browser": "^21.1.5",
+    "@angular/router": "^21.1.5",
+    "ng-apexcharts": "^2.0.4",
+    "@angular/platform-browser-dynamic": "^21.1.5",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.3.14",
-    "@hey-api/openapi-ts": "0.73.0",
-    "@playwright/test": "1.58.2",
-    "@tanstack/router-devtools": "^1.157.17",
-    "@tanstack/router-plugin": "^1.140.0",
-    "@types/node": "^25.1.0",
-    "@types/react": "^19.2.7",
-    "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react-swc": "^4.2.2",
-    "dotenv": "^17.2.3",
-    "tw-animate-css": "^1.4.0",
-    "typescript": "^5.9.3",
-    "vite": "^7.3.0"
+    "@angular/build": "^21.1.5",
+    "@angular/cli": "^21.1.5",
+    "@angular/compiler-cli": "^21.1.5",
+    "jsdom": "^27.1.0",
+    "typescript": "~5.9.2",
+    "vitest": "^4.0.8"
   }
 }

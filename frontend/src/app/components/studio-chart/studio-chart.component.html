@@ -1,0 +1,33 @@
+<div class="chart-card">
+  <div class="chart-header">
+    <div class="title-row">
+      <h2>{{ content.title }}</h2>
+      <span class="badge blue">{{ content.badge }}</span>
+    </div>
+  </div>
+
+  <div class="chart-main">
+    @if (options?.series?.[0]?.data?.length > 0) {
+      <apx-chart
+        [series]="options.series"
+        [chart]="options.chart"
+        [xaxis]="options.xaxis"
+        [yaxis]="options.yaxis"
+        [plotOptions]="options.plotOptions"
+        [dataLabels]="options.dataLabels"
+        [grid]="options.grid"
+        [colors]="options.colors"
+        [tooltip]="options.tooltip"
+        [theme]="options.theme"
+      ></apx-chart>
+    } @else {
+      <div class="loader-container">
+        <span class="loader-text">Analyse des studios...</span>
+      </div>
+    }
+  </div>
+
+  <div class="chart-footer">
+    <p class="analysis-text">{{ content.description }}</p>
+  </div>
+</div>

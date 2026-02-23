@@ -1,0 +1,45 @@
+<div class="project-description">
+  <div class="description-header">
+    <div class="intro-section">
+      <span class="top-label">Tableau de bord d'analyse</span>
+      <h2 class="welcome-text">Vue d'ensemble du marché</h2>
+      <p class="subtitle">{{ projectData.subtitle }}</p>
+    </div>
+
+    <div class="stats-grid">
+      @for (stat of projectData.stats; track stat.label) {
+        <div class="stat-card">
+          <span class="stat-value">{{ stat.value }}</span>
+          <span class="stat-label">{{ stat.label }}</span>
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="description-content">
+    <div class="main-text-wrapper">
+      <p class="main-description">{{ projectData.description }}</p>
+    </div>
+
+    <div class="features-grid">
+      @for (feature of projectData.features; track feature.title) {
+        <div class="feature-card">
+          <div class="feature-content">
+            <h3>{{ feature.title }}</h3>
+            <p>{{ feature.description }}</p>
+          </div>
+          <div class="card-accent"></div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="description-footer">
+    <div class="goal-container">
+      <span class="goal-pill">Objectif</span>
+      <p class="goal-text">
+        Optimiser la compréhension des tendances de l'animation par la donnée.
+      </p>
+    </div>
+  </div>
+</div>
