@@ -1,6 +1,8 @@
+import os
 import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
 from apscheduler.schedulers.background import BackgroundScheduler
 from app.services.mal_scraper import fetch_and_save_top_anime
 from app.api.router import router as api_router
@@ -19,10 +21,10 @@ app.add_middleware(
 
 
 app.include_router(api_router, prefix="/api")
-
+load_dotenv()
 
 scheduler = BackgroundScheduler()
-CLIENT_ID = "6fa03dc18db37d1716ae9957a553c798" # Récupéré sur https://myanimelist.net/apiconfig
+CLIENT_ID = os.getenv("MAL_CLIENT_ID", "default_id_if_missing") # Récupéré sur https://myanimelist.net/apiconfig
 
 @app.on_event("startup")
 def init_data_task():
