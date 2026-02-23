@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { FilterService } from '../../services/filter-service/filter.service';
-
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -32,17 +30,5 @@ export class NavbarComponent {
   ];
   studios = ['Tous', 'Shaft', 'Trigger', 'CloverWorks', 'MAPPA', 'ufotable'];
 
-  constructor(private filterService: FilterService) {}
-
-  onYearChange(value: string) {
-    this.filterService.updateFilter('year', value);
-  }
-
-  onGenreChange(value: string) {
-    this.filterService.updateFilter('genre', value);
-  }
-
-  onStudioChange(value: string) {
-    this.filterService.updateFilter('studio', value);
-  }
+  constructor() {}
 }
