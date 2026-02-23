@@ -51,7 +51,7 @@ export class GenreChartComponent implements OnInit {
         pie: {
           customScale: 0.9,
           donut: {
-            size: '80%',
+            size: '70%',
             labels: {
               show: true,
               total: {
@@ -69,13 +69,13 @@ export class GenreChartComponent implements OnInit {
         show: true,
         position: 'right',
         verticalAlign: 'middle',
-        horizontalAlign: 'center',
+        horizontalAlign: 'right',
         fontSize: '20px',
         width: 300,
         offsetY: 0,
-        offsetX: 0,
+        offsetX: -30,
         itemMargin: {
-          horizontal: 0,
+          horizontal: 10,
           vertical: 6,
         },
         labels: {
