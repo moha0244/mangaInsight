@@ -1,0 +1,70 @@
+@import '../shared-chart-styles.scss';
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.chart-card {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+
+  .chart-header {
+    .title-row {
+      gap: 12px;
+
+      h2 {
+        font-size: 1.25rem;
+      }
+
+      .badge.blue {
+        background: rgba(#5c6bc0, 0.15);
+        color: #7986cb;
+        border: 1px solid rgba(121, 134, 203, 0.3);
+      }
+    }
+  }
+
+  .chart-footer {
+    .special-legend {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      font-size: 0.9rem;
+
+      .line-pink {
+        width: 25px;
+        height: 3px;
+        background: #ec407a;
+        border-radius: 2px;
+        display: inline-block;
+      }
+
+      .label {
+        font-size: 0.9rem;
+        color: #8b949e;
+      }
+      .stats {
+        color: #f0f6fc;
+      }
+    }
+  }
+
+  .loader {
+    color: #8b949e;
+    font-style: italic;
+    animation: pulse 1.5s infinite ease-in-out;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}

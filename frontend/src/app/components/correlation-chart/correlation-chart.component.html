@@ -1,0 +1,40 @@
+<div class="chart-card">
+  <div class="chart-header">
+    <div class="title-row">
+      <h2>{{ content.title }}</h2>
+      <span class="badge blue">{{ content.badge }}</span>
+    </div>
+  </div>
+
+  <div class="chart-main">
+    @if (options.series && options.series[0]?.data?.length > 0) {
+      <apx-chart
+        [series]="options.series"
+        [chart]="options.chart"
+        [xaxis]="options.xaxis"
+        [yaxis]="options.yaxis"
+        [colors]="options.colors"
+        [stroke]="options.stroke"
+        [markers]="options.markers"
+        [grid]="options.grid"
+        [theme]="options.theme"
+        [tooltip]="options.tooltip"
+      ></apx-chart>
+    } @else {
+      <div class="loader">Chargement des points...</div>
+    }
+  </div>
+
+  <div class="chart-footer">
+    @if (content.regressionLabel) {
+      <div class="special-legend">
+        <span class="line-pink"></span>
+        <span class="label">{{ content.regressionLabel }}</span>
+        <span class="stats"
+          ><strong>{{ content.badge }}</strong></span
+        >
+      </div>
+    }
+    <p class="analysis-text">{{ content.description }}</p>
+  </div>
+</div>

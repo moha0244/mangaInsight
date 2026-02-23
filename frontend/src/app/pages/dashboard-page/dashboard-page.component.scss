@@ -1,0 +1,45 @@
+.dashboard-wrapper {
+  background-color: #0b0e14;
+  min-height: 100vh;
+  color: white;
+
+  .description-section {
+    padding: 24px;
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+
+  .main-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    padding: 24px;
+    max-width: 1600px;
+    margin: 0 auto;
+
+    .card {
+      min-height: 700px;
+      height: 700px;
+    }
+  }
+
+  .card {
+    background: #161b22;
+    border-radius: 12px;
+    border: 1px solid #30363d;
+    overflow: hidden;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    &.scrollable {
+      max-height: 700px;
+      overflow-y: auto;
+    }
+  }
+}

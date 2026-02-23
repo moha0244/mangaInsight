@@ -1,0 +1,86 @@
+.custom-select-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Inter', sans-serif;
+
+  .label {
+    color: #8b949e;
+    font-size: 14px;
+  }
+
+  .select-box {
+    position: relative;
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 6px 15px;
+    min-width: 120px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: border-color 0.2s;
+
+    &:hover,
+    &.open {
+      border-color: #58a6ff;
+    }
+
+    .current-value {
+      color: #f0f6fc;
+      font-size: 14px;
+    }
+
+    .arrow {
+      font-size: 10px;
+      color: #8b949e;
+      transition: transform 0.2s;
+    }
+
+    &.open .arrow {
+      transform: rotate(180deg);
+    }
+  }
+
+  .options-list {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 0;
+    right: 0;
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    margin: 0;
+    padding: 5px 0;
+    list-style: none;
+    z-index: 1000;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    max-height: 300px;
+    overflow-y: auto;
+
+    li {
+      padding: 8px 15px;
+      color: #f0f6fc;
+      font-size: 14px;
+      transition: background 0.2s;
+
+      &:hover {
+        background: #30363d;
+      }
+
+      &.active {
+        background: #1f6feb;
+        color: white;
+      }
+    }
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #30363d;
+      border-radius: 10px;
+    }
+  }
+}
