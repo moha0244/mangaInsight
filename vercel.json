@@ -1,22 +1,7 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "backend/app/main.py",
-      "use": "@vercel/python"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/backend/app/main.py"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/frontend/index.html"
-    }
-  ],
-  "env": {
-    "PYTHON_VERSION": "3.10"
-  }
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/backend-nest/api/$1" },
+    { "source": "/(.*)", "destination": "/frontend-angular/$1" }
+  ]
 }
