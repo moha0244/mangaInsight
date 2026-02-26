@@ -1,59 +1,70 @@
-# MangaAppNouvelle
+# MangaInsight - Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.4.
+Frontend Angular/React pour l'application MangaInsight, qui consomme l'API NestJS du backend.
 
-## Development server
-
-To start a local development server, run:
+## Installation
 
 ```bash
-ng serve
+npm install
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Configuration
 
-## Code scaffolding
+### Variables d'environnement
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Créez un fichier `.env` à la racine du dossier frontend :
+
+```
+REACT_APP_API_URL=http://localhost:8000
+```
+
+Ou si vous utilisez Angular, modifiez `src/environments/environment.ts` :
+
+```ts
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:8000',
+};
+```
+
+## Démarrage
+
+Assurez-vous que le backend NestJS est en cours d'exécution sur le port 8000 :
 
 ```bash
-ng generate component component-name
+# Dans le dossier backend-nest
+npm run start
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Puis lancez le frontend :
 
 ```bash
-ng generate --help
+# Dans le dossier frontend
+npm start
 ```
 
-## Building
+L'application sera disponible sur `http://localhost:4200` (Angular) ou `http://localhost:3000` (React).
 
-To build the project run:
+## Communication avec le backend
+
+Le frontend utilise l'API du serveur NestJS pour :
+
+- Récupérer les données d'anime depuis MyAnimeList
+- Consulter le cache local des animés
+- Effectuer des recherches et filtres
+
+Tous les appels API sont pointés sur `http://localhost:8000` (ou la valeur définie dans `.env`).
+
+## Développement
 
 ```bash
-ng build
+npm run dev      # Mode développement avec hot-reload
+npm run build    # Build de production
+npm run test     # Lancer les tests
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Notes
 
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- Le backend doit être configuré avec votre clé MyAnimeList (`MAL_CLIENT_ID` dans le `.env` du backend)
+- CORS est activé sur le backend pour permettre les requêtes du frontend
+- En production, mettez à jour `apiUrl` dans `environment.prod.ts` pour pointer sur votre serveur déployé
