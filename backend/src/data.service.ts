@@ -14,11 +14,18 @@ interface AnimeNode {
 
 @Injectable()
 export class DataService {
-  private cachePath = path.join(__dirname, "../data/anime_cache.json");
+  private readonly dataDir = path.join(process.cwd(), "data");
+  private readonly cachePath = path.join(this.dataDir, "anime_cache.json");
 
+  /**
+   * Charge le contenu du fichier de cache en JSON.
+   * Si une erreur se produit lors de la lecture, affiche un message d'erreur et renvoie un tableau vide.
+   * @returns {Promise<any[]>} Le contenu du fichier de cache en JSON ou un tableau vide en cas d'erreur.
+   */
   private async loadCachedData(): Promise<any[]> {
     try {
       const raw = await readFile(this.cachePath, { encoding: "utf-8" });
+
       return JSON.parse(raw);
     } catch (e) {
       console.error("Erreur lecture cache", e);

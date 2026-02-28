@@ -19,6 +19,17 @@ export class AnimeScraperService {
     this.fetchAndSaveTopAnime();
   }
 
+  /**
+   * Fetches the top anime from MyAnimeList API and saves them
+   * to a local JSON cache file.
+   *
+   * This function is called every 30 minutes by the scheduler.
+   * It fetches the top anime in blocks of 500 and saves them
+   * to a local file. If the API blocks the request, it will
+   * stop fetching anime.
+   *
+   * @returns {Promise<void>}
+   */
   async fetchAndSaveTopAnime() {
     const clientId = process.env.MAL_CLIENT_ID;
 
