@@ -7,7 +7,7 @@ import { AnimeStats } from '../../interfaces/anim-stats';
   providedIn: 'root',
 })
 export class AnimeDataService {
-  private apiUrl = 'http://localhost:8000/api';
+  private apiUrl = 'https://mangainsight-1.onrender.com/api';
 
   constructor(private http: HttpClient) {}
 
