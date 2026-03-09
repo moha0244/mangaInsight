@@ -43,7 +43,7 @@ export class CorrelationChartComponent implements OnInit {
       ...this.options,
       series: [
         {
-          name: 'Animes',
+          name: 'Anime',
           type: 'scatter',
           data: points,
         },
@@ -56,6 +56,9 @@ export class CorrelationChartComponent implements OnInit {
           ],
         },
       ],
+      legend: {
+        show: false,
+      },
     };
   }
 
@@ -89,6 +92,14 @@ export class CorrelationChartComponent implements OnInit {
       },
       xaxis: {
         type: 'logarithmic',
+        title: {
+          text: 'Popularité (Nombre de membres)',
+          style: {
+            color: '#8b949e',
+            fontSize: '14px',
+            fontWeight: 500,
+          },
+        },
         tickAmount: 4,
         axisBorder: { show: false },
         axisTicks: { show: false },
@@ -104,6 +115,14 @@ export class CorrelationChartComponent implements OnInit {
       yaxis: {
         min: 6,
         max: 10,
+        title: {
+          text: 'Score Critique',
+          style: {
+            color: '#8b949e',
+            fontSize: '14px',
+            fontWeight: 500,
+          },
+        },
         tickAmount: 2,
         labels: {
           style: { colors: '#8b949e' },

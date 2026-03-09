@@ -58,6 +58,9 @@ export class SeasonalChartComponent implements OnInit {
         ...this.options.xaxis,
         categories: ['Hiver', 'Printemps', 'Été', 'Automne'],
       },
+      legend: {
+        show: false,
+      },
     };
   }
 
