@@ -1,17 +1,17 @@
 export const ANIME_CONTENT = {
   correlation: {
     title: 'Corrélation Score vs Popularité',
-    badge: '2000 animés',
+    badge: ' Animés',
     description:
-      'Analyse de la relation entre la popularité (nombre de membres) et les scores critiques sur une échelle logarithmique. Chaque point représente un anime unique. La ligne de régression rose montre la tendance générale : les animés très populaires tendent à avoir des scores plus élevés, mais avec une variance significative. Les outliers en bas à droite indiquent des animés populaires mais mal notés, tandis que ceux en haut à gauche sont des pépites moins connues mais excellentes.',
-    regressionLabel: 'Régression linéaire (R² ≈ 0.65)',
+      'Ce graphique illustre la corrélation entre la popularité des animes (basée sur le nombre de membres) et leurs notes critiques. La ligne de tendance rose met en évidence une corrélation positive globale : les œuvres les plus populaires tendent à obtenir de meilleures évaluations. Toutefois, la dispersion importante des points indique que la popularité ne garantit pas la qualité, révélant à la fois des succès critiques moins connus et des titres très populaires au score plus modeste.',
+    regressionLabel: 'Régression linéaire ',
     data: [],
   },
   genres: {
     title: 'Répartition par Genre',
     badge: 'Top 100',
     description:
-      'Distribution des genres parmi les 100 meilleurs animés classés par score. Le mode "Genre principal" compte chaque anime selon son genre dominant, tandis que "Multi-genres" applique une pondération fractionnaire (1/n) pour les animés avec plusieurs genres. Action et Drame dominent avec environ 25% chacun, suivis par la Comédie et la Fantaisie. Cliquez sur les éléments de légende pour filtrer temporairement un genre et mieux visualiser les autres.',
+      "Répartition thématique des 100 animes les mieux notés. Ce graphique illustre la prédominance des différents genres au sein du top 100 actuel. La taille de chaque section reflète la proportion représentée par chaque genre dans le classement, offrant une vue d'ensemble sur les thématiques qui dominent les œuvres les plus plébiscitées par la critique. Cliquez sur les éléments de légende pour filtrer temporairement un genre et mieux visualiser les autres.",
     series: [],
     labels: [],
   },
@@ -19,7 +19,7 @@ export const ANIME_CONTENT = {
     title: 'Performance Critique par Saison',
     badge: '2024—2025',
     description:
-      'Évolution des scores moyens par saison de diffusion sur deux années. Les aires colorées représentent la bande d\'écart-type (± σ) indiquant la variabilité des scores dans chaque saison. L\'automne 2024 se distingue avec le score moyen le plus élevé (8.2/10) et la plus faible variabilité, suggérant une saison particulièrement cohérente en qualité. Le printemps montre généralement plus de dispersion, reflétant une plus grande diversité de productions.',
+      "Analyse comparative de la performance critique saisonnière sur deux années. Les courbes retracent l'évolution des scores moyens, tandis que les zones ombrées illustrent la volatilité des notes au sein de chaque saison (écart-type). Ce graphique permet d'identifier les périodes de l'année caractérisées par une homogénéité qualitative élevée ou, à l'inverse, par une plus grande dispersion dans la réception critique des œuvres.",
     categories: ['Hiver', 'Printemps', 'Été', 'Automne'],
     series: [],
   },
@@ -27,7 +27,7 @@ export const ANIME_CONTENT = {
     title: 'Top Studios (Efficacité)',
     badge: 'min. 3 titres',
     description:
-      'Classement des studios par score moyen pondéré, filtré pour n\'inclure que les studios avec au moins 3 productions dans notre dataset. MAPPA et Ufotable dominent avec des scores moyens supérieurs à 8.5/10, démontrant une excellence constante. La barre horizontale représente le score moyen, et les étiquettes précises montrent les variations subtiles entre studios. Cliquez sur une barre pour explorer la filmographie détaillée du studio.',
+      "Classement des studios selon leur score critique moyen pondéré, filtré pour inclure uniquement les structures ayant produit au moins trois titres dans notre base de données. Ce palmarès met en lumière les studios démontrant la plus grande constance qualitative. La longueur des barres offre une lecture immédiate de la performance relative, permettant d'identifier rapidement les leaders en termes d'efficacité critique.",
     names: [],
     scores: [],
   },
