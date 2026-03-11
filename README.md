@@ -1,233 +1,347 @@
-# Full Stack FastAPI Template
+# MangaInsight
 
-<a href="https://github.com/fastapi/full-stack-fastapi-template/actions?query=workflow%3A%22Test+Docker+Compose%22" target="_blank"><img src="https://github.com/fastapi/full-stack-fastapi-template/workflows/Test%20Docker%20Compose/badge.svg" alt="Test Docker Compose"></a>
-<a href="https://github.com/fastapi/full-stack-fastapi-template/actions?query=workflow%3A%22Test+Backend%22" target="_blank"><img src="https://github.com/fastapi/full-stack-fastapi-template/workflows/Test%20Backend/badge.svg" alt="Test Backend"></a>
-<a href="https://coverage-badge.samuelcolvin.workers.dev/redirect/fastapi/full-stack-fastapi-template" target="_blank"><img src="https://coverage-badge.samuelcolvin.workers.dev/fastapi/full-stack-fastapi-template.svg" alt="Coverage"></a>
+Plateforme d'analyse et d'exploration de données animés/manga avec dashboard interactif.
 
-## Technology Stack and Features
+## Aperçu du Projet
 
-- ⚡ [**FastAPI**](https://fastapi.tiangolo.com) for the Python backend API.
-  - 🧰 [SQLModel](https://sqlmodel.tiangolo.com) for the Python SQL database interactions (ORM).
-  - 🔍 [Pydantic](https://docs.pydantic.dev), used by FastAPI, for the data validation and settings management.
-  - 💾 [PostgreSQL](https://www.postgresql.org) as the SQL database.
-- 🚀 [React](https://react.dev) for the frontend.
-  - 💃 Using TypeScript, hooks, [Vite](https://vitejs.dev), and other parts of a modern frontend stack.
-  - 🎨 [Tailwind CSS](https://tailwindcss.com) and [shadcn/ui](https://ui.shadcn.com) for the frontend components.
-  - 🤖 An automatically generated frontend client.
-  - 🧪 [Playwright](https://playwright.dev) for End-to-End testing.
-  - 🦇 Dark mode support.
-- 🐋 [Docker Compose](https://www.docker.com) for development and production.
-- 🔒 Secure password hashing by default.
-- 🔑 JWT (JSON Web Token) authentication.
-- 📫 Email based password recovery.
-- 📬 [Mailcatcher](https://mailcatcher.me) for local email testing during development.
-- ✅ Tests with [Pytest](https://pytest.org).
-- 📞 [Traefik](https://traefik.io) as a reverse proxy / load balancer.
-- 🚢 Deployment instructions using Docker Compose, including how to set up a frontend Traefik proxy to handle automatic HTTPS certificates.
-- 🏭 CI (continuous integration) and CD (continuous deployment) based on GitHub Actions.
+MangaInsight est une application web full-stack qui permet de :
 
-### Dashboard Login
+- Récupérer et analyser les données d'animes depuis MyAnimeList
+- Visualiser des statistiques et tendances via des dashboards interactifs
+- Explorer et rechercher des animés avec filtres avancés
+- Consulter un cache local pour des performances optimales
 
-[![API docs](img/login.png)](https://github.com/fastapi/full-stack-fastapi-template)
+## Architecture Technique
 
-### Dashboard - Admin
+### Backend (NestJS/TypeScript)
 
-[![API docs](img/dashboard.png)](https://github.com/fastapi/full-stack-fastapi-template)
+- **Framework** : NestJS avec TypeScript
+- **Base de données** : PostgreSQL avec SQLModel (pas encore utilisé)
+- **API** : RESTful avec validation Pydantic
+- **Cache** : Fichier JSON local (`anime_cache.json`)
+- **Scheduler** : Tâches planifiées toutes les 15 minutes
+- **Authentification** : JWT tokens
 
-### Dashboard - Items
+### Frontend (Angular)
 
-[![API docs](img/dashboard-items.png)](https://github.com/fastapi/full-stack-fastapi-template)
+- **Framework** : Angular 21 avec TypeScript
+- **UI** : Composants modernes avec ApexCharts pour les graphiques
+- **Build Tool** : Angular CLI
+- **Tests** : Vitest + jsdom
 
-### Dashboard - Dark Mode
+### Infrastructure
 
-[![API docs](img/dashboard-dark.png)](https://github.com/fastapi/full-stack-fastapi-template)
+- **Containerisation** : Docker Compose
+- **Reverse Proxy** : Traefik avec HTTPS automatique
+- **Database Admin** : Adminer
+- **Monitoring** : Health checks intégrés
 
-### Interactive API Documentation
+## Prérequis
 
-[![API docs](img/docs.png)](https://github.com/fastapi/full-stack-fastapi-template)
+- Node.js 18+ et npm
+- Docker et Docker Compose
+- PostgreSQL (si exécution locale sans Docker)
+- Clé API MyAnimeList (MAL_CLIENT_ID)
 
-## How To Use It
+## Installation
 
-You can **just fork or clone** this repository and use it as is.
-
-✨ It just works. ✨
-
-### How to Use a Private Repository
-
-If you want to have a private repository, GitHub won't allow you to simply fork it as it doesn't allow changing the visibility of forks.
-
-But you can do the following:
-
-- Create a new GitHub repo, for example `my-full-stack`.
-- Clone this repository manually, set the name with the name of the project you want to use, for example `my-full-stack`:
+### 1. Cloner le Repository
 
 ```bash
-git clone git@github.com:fastapi/full-stack-fastapi-template.git my-full-stack
+git clone <repository-url>
+cd mangaInsight
 ```
 
-- Enter into the new directory:
+### 2. Configuration des Variables d'Environnement
+
+Créez un fichier `.env` à la racine du projet :
+
+````env
+# MyAnimeList API
+MAL_CLIENT_ID="votre_clé_api_mal"
+
+**Génération des clés secrètes :**
 
 ```bash
-cd my-full-stack
-```
-
-- Set the new origin to your new repository, copy it from the GitHub interface, for example:
-
-```bash
-git remote set-url origin git@github.com:octocat/my-full-stack.git
-```
-
-- Add this repo as another "remote" to allow you to get updates later:
-
-```bash
-git remote add upstream git@github.com:fastapi/full-stack-fastapi-template.git
-```
-
-- Push the code to your new repository:
-
-```bash
-git push -u origin master
-```
-
-### Update From the Original Template
-
-After cloning the repository, and after doing changes, you might want to get the latest changes from this original template.
-
-- Make sure you added the original repository as a remote, you can check it with:
-
-```bash
-git remote -v
-
-origin    git@github.com:octocat/my-full-stack.git (fetch)
-origin    git@github.com:octocat/my-full-stack.git (push)
-upstream    git@github.com:fastapi/full-stack-fastapi-template.git (fetch)
-upstream    git@github.com:fastapi/full-stack-fastapi-template.git (push)
-```
-
-- Pull the latest changes without merging:
-
-```bash
-git pull --no-commit upstream master
-```
-
-This will download the latest changes from this template without committing them, that way you can check everything is right before committing.
-
-- If there are conflicts, solve them in your editor.
-
-- Once you are done, commit the changes:
-
-```bash
-git merge --continue
-```
-
-### Configure
-
-You can then update configs in the `.env` files to customize your configurations.
-
-Before deploying it, make sure you change at least the values for:
-
-- `SECRET_KEY`
-- `FIRST_SUPERUSER_PASSWORD`
-- `POSTGRES_PASSWORD`
-
-You can (and should) pass these as environment variables from secrets.
-
-Read the [deployment.md](./deployment.md) docs for more details.
-
-### Generate Secret Keys
-
-Some environment variables in the `.env` file have a default value of `changethis`.
-
-You have to change them with a secret key, to generate secret keys you can run the following command:
-
-```bash
+# Pour SECRET_KEY
 python -c "import secrets; print(secrets.token_urlsafe(32))"
-```
+````
 
-Copy the content and use that as password / secret key. And run that again to generate another secure key.
-
-## How To Use It - Alternative With Copier
-
-This repository also supports generating a new project using [Copier](https://copier.readthedocs.io).
-
-It will copy all the files, ask you configuration questions, and update the `.env` files with your answers.
-
-### Install Copier
-
-You can install Copier with:
+### 3. Installation des Dépendances
 
 ```bash
-pip install copier
+# Backend
+cd backend
+npm install
+cd ..
+
+# Frontend
+cd frontend
+npm install
+cd ..
 ```
 
-Or better, if you have [`pipx`](https://pipx.pypa.io/), you can run it with:
+## 🏃‍♂️ Démarrage Rapide
+
+### Option 1: Docker Compose (Recommandé)
 
 ```bash
-pipx install copier
+# Démarrer tous les services
+docker-compose up -d
+
+# Vérifier les logs
+docker-compose logs -f
 ```
 
-**Note**: If you have `pipx`, installing copier is optional, you could run it directly.
+L'application sera accessible :
 
-### Generate a Project With Copier
+- **Frontend** : http://dashboard.votredomaine.com
+- **API Backend** : http://api.votredomaine.com
 
-Decide a name for your new project's directory, you will use it below. For example, `my-awesome-project`.
+### Option 2: Développement Local
 
-Go to the directory that will be the parent of your project, and run the command with your project's name:
+#### Backend (NestJS)
 
 ```bash
-copier copy https://github.com/fastapi/full-stack-fastapi-template my-awesome-project --trust
+cd backend
+npm run start:dev
 ```
 
-If you have `pipx` and you didn't install `copier`, you can run it directly:
+Le backend démarre sur `http://localhost:8000`
+
+#### Frontend (Angular)
 
 ```bash
-pipx run copier copy https://github.com/fastapi/full-stack-fastapi-template my-awesome-project --trust
+cd frontend
+npm start
 ```
 
-**Note** the `--trust` option is necessary to be able to execute a [post-creation script](https://github.com/fastapi/full-stack-fastapi-template/blob/master/.copier/update_dotenv.py) that updates your `.env` files.
+Le frontend démarre sur `http://localhost:4200`
 
-### Input Variables
+### Option 3: Scripts NPM
 
-Copier will ask you for some data, you might want to have at hand before generating the project.
+Depuis la racine :
 
-But don't worry, you can just update any of that in the `.env` files afterwards.
+```bash
+# Démarrer le frontend uniquement
+npm run dev
 
-The input variables, with their default values (some auto generated) are:
+# Linter
+npm run lint
 
-- `project_name`: (default: `"FastAPI Project"`) The name of the project, shown to API users (in .env).
-- `stack_name`: (default: `"fastapi-project"`) The name of the stack used for Docker Compose labels and project name (no spaces, no periods) (in .env).
-- `secret_key`: (default: `"changethis"`) The secret key for the project, used for security, stored in .env, you can generate one with the method above.
-- `first_superuser`: (default: `"admin@example.com"`) The email of the first superuser (in .env).
-- `first_superuser_password`: (default: `"changethis"`) The password of the first superuser (in .env).
-- `smtp_host`: (default: "") The SMTP server host to send emails, you can set it later in .env.
-- `smtp_user`: (default: "") The SMTP server user to send emails, you can set it later in .env.
-- `smtp_password`: (default: "") The SMTP server password to send emails, you can set it later in .env.
-- `emails_from_email`: (default: `"info@example.com"`) The email account to send emails from, you can set it later in .env.
-- `postgres_password`: (default: `"changethis"`) The password for the PostgreSQL database, stored in .env, you can generate one with the method above.
-- `sentry_dsn`: (default: "") The DSN for Sentry, if you are using it, you can set it later in .env.
+# Tests
+npm run test
+```
 
-## Backend Development
+## 🔧 Utilisation
 
-Backend docs: [backend/README.md](./backend/README.md).
+### 1. Première Connexion
 
-## Frontend Development
+1. Accédez au dashboard : `http://localhost:4200` (développement) ou `http://dashboard.votredomaine.com` (production)
+2. Connectez-vous avec le compte superutilisateur :
+   - Email : `admin@example.com` (ou votre FIRST_SUPERUSER)
+   - Mot de passe : celui défini dans `FIRST_SUPERUSER_PASSWORD`
 
-Frontend docs: [frontend/README.md](./frontend/README.md).
+### 2. Exploration des Données
 
-## Deployment
+Le scheduler récupère automatiquement les données d'animes toutes les 15 minutes. Vous pouvez :
 
-Deployment docs: [deployment.md](./deployment.md).
+- **Dashboard Principal** : Vue d'ensemble des statistiques
+- **Recherche** : Filtrer par titre, genre, score, etc.
+- **Détails** : Informations complètes sur chaque anime
+- **Analytics** : Graphiques et tendances
 
-## Development
+### 3. API Endpoints
 
-General development docs: [development.md](./development.md).
+L'API expose les endpoints principaux :
 
-This includes using Docker Compose, custom local domains, `.env` configurations, etc.
+```bash
+# Health check
+GET /api/v1/utils/health-check/
 
-## Release Notes
+# Liste des animes (avec pagination)
+GET /api/animes?page=1&limit=20
 
-Check the file [release-notes.md](./release-notes.md).
+# Recherche d'animes
+GET /api/animes/search?q=naruto
 
-## License
+# Statistiques
+GET /api/animes/stats
 
-The Full Stack FastAPI Template is licensed under the terms of the MIT license.
+# Détails d'un anime
+GET /api/animes/{id}
+```
+
+## Développement
+
+### Backend
+
+```bash
+cd backend
+
+# Développement avec hot-reload
+npm run start:dev
+
+# Build pour production
+npm run build
+
+# Linter
+npm run lint
+
+# Tests
+npm run test
+```
+
+Le backend NestJS expose une API RESTful sur le port 8000 avec :
+
+- Authentification JWT
+- Validation des données
+- Cache local des données MyAnimeList
+- Scheduler pour la récupération automatique
+
+### Frontend
+
+```bash
+cd frontend
+
+# Développement avec hot-reload
+npm start
+
+# Build pour production
+npm run build
+
+# Watch mode
+npm run watch
+
+# Tests
+npm run test
+```
+
+Le frontend Angular offre :
+
+- Dashboard responsive avec Material Design
+- Graphiques interactifs (ApexCharts)
+- Recherche et filtrage avancés
+- Mode sombre/clair
+
+## Docker & Production
+
+### Configuration Production
+
+1. **Domaine et SSL** :
+   - Configurez `DOMAIN` dans votre `.env`
+   - Traefik génère automatiquement des certificats SSL avec Let's Encrypt
+
+2. **Services Docker** :
+
+   ```bash
+   # Démarrer tous les services
+   docker-compose up -d
+
+   # Vérifier l'état
+   docker-compose ps
+
+   # Logs d'un service
+   docker-compose logs -f backend
+   ```
+
+3. **Mise à jour** :
+
+   ```bash
+   # Pull des nouvelles images
+   docker-compose pull
+
+   # Redémarrer avec les nouvelles images
+   docker-compose up -d --force-recreate
+   ```
+
+### Services Disponibles
+
+- **Frontend** : Dashboard Angular
+- **Backend** : API NestJS
+- **Database** : PostgreSQL
+- **Adminer** : Interface de gestion BDD
+- **Traefik** : Reverse proxy avec SSL
+
+## Monitoring & Logs
+
+### Health Checks
+
+- Backend : `GET /api/v1/utils/health-check/`
+- Database : Vérification automatique via Docker
+
+### Logs
+
+```bash
+# Tous les services
+docker-compose logs -f
+
+# Service spécifique
+docker-compose logs -f backend
+docker-compose logs -f frontend
+```
+
+## Sécurité
+
+- **Authentification** : Tokens JWT avec expiration
+- **CORS** : Configuration restrictive en production
+- **Environment Variables** : Secrets non versionnés
+- **HTTPS** : SSL/TLS automatique en production
+- **Database** : Mot de passe fort et accès limité
+
+## Dépannage
+
+### Problèmes Communs
+
+1. **Port déjà utilisé** :
+
+   ```bash
+   # Vérifier les ports
+   netstat -tulpn | grep :8000
+
+   # Tuer le processus
+   kill -9 <PID>
+   ```
+
+2. **Problèmes de cache** :
+
+   ```bash
+   # Vider le cache backend
+   rm backend/data/anime_cache.json
+
+   # Redémarrer le backend
+   docker-compose restart backend
+   ```
+
+3. **Database connection** :
+   ```bash
+   # Vérifier la connexion BDD
+   docker-compose exec db psql -U $POSTGRES_USER -d $POSTGRES_DB
+   ```
+
+### Support
+
+- **Documentation Backend** : [backend/README.md](./backend/README.md)
+- **Documentation Frontend** : [frontend/README.md](./frontend/README.md)
+- **Guide Déploiement** : [deployment.md](./deployment.md)
+- **Développement** : [development.md](./development.md)
+
+## Notes de Version
+
+Consultez [release-notes.md](./release-notes.md) pour les dernières mises à jour et fonctionnalités.
+
+## Contribuer
+
+1. Fork le projet
+2. Créer une branche feature (`git checkout -b feature/amazing-feature`)
+3. Commit les changements (`git commit -m 'Add amazing feature'`)
+4. Push la branche (`git push origin feature/amazing-feature`)
+5. Ouvrir une Pull Request
+
+## Licence
+
+Ce projet est sous licence MIT - voir le fichier [LICENSE](./LICENSE) pour les détails.
+
+---
+
+**MangaInsight** - Votre plateforme d'analyse d'animes et manga 🎌✨
